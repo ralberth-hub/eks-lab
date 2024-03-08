@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cpu-stress-test
+  namespace: casestudy-ns
+spec:
+  template:
+    spec:
+      containers:
+      - name: cpu-stress
+        image: vish/stress
+        args:
+        - -cpus
+        - "2"
+        - -mem-total
+        - 950Mi
+        - -mem-alloc-size
+        - 100Mi
+        - -mem-alloc-sleep
+        - 1s        
+      restartPolicy: Never

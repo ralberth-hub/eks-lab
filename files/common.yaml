@@ -1,2 +1,10 @@
 deploymentrepo: "terraform"
 terraform_profile: "terraform"
+
+eks:
+  cluster_name: "emirates-eks"
+  cluster_version: "1.29"
+  instance_type: "t3a.medium"
+
+casestudy:
+  namespace: "casestudy-ns"
