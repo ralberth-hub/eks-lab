@@ -30,17 +30,26 @@ resource "kubernetes_deployment" "nginx" {
           port {
             container_port = 80
           }
+          
+          resources {
+            limits = {
+              cpu    = "500m"
+              memory = "512Mi"
+            }
+            requests = {
+              cpu    = "200m"
+              memory = "256Mi"
+            }
+          }
         }
 
         affinity {
-          node_affinity {
-            preferred_during_scheduling_ignored_during_execution {
-              weight = 1
-              preference {
-                match_expressions {
-                  key      = "kubernetes.io/hostname"
-                  operator = "In"
-                  values   = ["ip-10-16-19-40.ap-southeast-1.compute.internal"]
+          pod_anti_affinity {
+            required_during_scheduling_ignored_during_execution {
+              topology_key = "kubernetes.io/hostname"
+              label_selector {
+                match_labels = {
+                  app = "nginx"
                 }
               }
             }
