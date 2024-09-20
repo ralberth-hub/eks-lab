@@ -1,1 +1,1 @@
-# Emirates - Case study
+# EKS Blueprint test
